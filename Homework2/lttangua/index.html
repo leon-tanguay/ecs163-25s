@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>D3 Terrorism Map + Histogram + Streamgraph</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    #histogram,
+    #streamgraph {
+      width: 50vw;
+      height: 100%;
+      background: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+    #map {
+      height: 85vh;
+      width: 100%;
+    }
+
+    /* Layout: histogram and streamgraph side by side */
+    #top-row {
+      display: flex;
+      height: 25vh;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Controls above streamgraph */
+    #stream-controls {
+      margin-bottom: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="top-row">
+    <div id="histogram">
+      <svg id="histSvg"></svg>
+    </div>
+
+    <div id="streamgraph">
+      <div id="stream-controls">
+        <label for="streamVar">Category:</label>
+        <select id="streamVar">
+          <option value="weaptype1">Weapon Type</option>
+          <option value="attacktype1">Attack Type</option>
+          <option value="region">Region</option>
+          <option value="targtype1">Target Type</option>
+        </select>
+      </div>
+      <h4 id="streamTitle" style="text-align:center; margin:2px 0;">Weapon Type over Time</h4>
+      <svg id="streamSvg"></svg>
+    </div>
+  </div>
+
+  <div id="map">
+    <svg id="mapSvg"></svg>
+  </div>
+
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="main.js"></script>
+
+  <div id="introPopup" style="
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #999;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    z-index: 9999;
+  ">
+   Click a bar on the chart to view that year's attacks.
+  </div>
+</body>
+</html>
